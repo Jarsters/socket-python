@@ -25,7 +25,6 @@ threading.Thread(target=routine_message_from_server, daemon=True).start()
 if __name__ == "__main__":
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server.settimeout(10)
     server.bind(("0.0.0.0", 55555))
     server.listen()
     print("Server online...")
@@ -37,5 +36,8 @@ if __name__ == "__main__":
             print(f"Ada client baru terdaftar dari alamat {client_address}")
             threading.Thread(target=handle_client, args=(client_socket,), daemon=True).start()
         except KeyboardInterrupt as err:
+            print(err)
+            break
+        except Exception as err:
             print(err)
             break
