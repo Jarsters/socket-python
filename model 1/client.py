@@ -86,15 +86,14 @@ if __name__ == "__main__":
 
     username = input("Masukkan username: ")
     client.send(f"username {username}".encode())
-    threading.Thread(target=listen_server, args=(client,), daemon=True).start()
-
-    send_message_to_server(client, "daftar client")
 
     ip_public = input("Masukkan ip: ")
     port = int(input("Masukkan port: "))
     address = (ip_public, port)
 
     threading.Thread(target=handle_another_client, args=(client,address,), daemon=True).start()
+    threading.Thread(target=listen_server, args=(client,), daemon=True).start()
+
     while True:
         message = input("Pesan: ")
         if(message.lower() == "exit"):

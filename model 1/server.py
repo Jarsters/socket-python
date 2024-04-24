@@ -67,7 +67,7 @@ if __name__ == "__main__":
             
             username = client_socket.recv(1024).decode()
             username = username.split("username ")[1]
-            client_socket.send(json.dumps(client_address).encode())
+            # client_socket.send(json.dumps(client_address).encode())
             print(f"Ada client baru terdaftar dari alamat {client_address} -- {username}")
             # clients[client_socket] = client_address
             clients[username] = {
