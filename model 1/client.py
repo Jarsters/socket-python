@@ -31,6 +31,7 @@ def handle_another_client(socket_to_tracker: socket.socket, address):
     config_socket(socket_with_client)
     print(f"Socket to tracker: {socket_to_tracker}")
     # socket_with_client.bind(socket_to_tracker.getsockname())
+    print(f"Address: {address}")
     socket_with_client.bind(address)
     socket_with_client.listen()
 
