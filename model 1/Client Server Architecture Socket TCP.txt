@@ -4,10 +4,12 @@ Server bertugas sebagai berikut:
 	1. Melayani client yang ingin terkoneksi ke dalam jaringan.
 	2. Menyimpan daftar client yang terkoneksi di dalam jaringan.
 	3. Ketika ada client baru yang terkoneksi ke dalam jaringan, print daftar client.
-	4. Setiap 5 detik akan mengirimkan ke semua client berupa pesan "Halo ini pesan rutinan dari server".
+	4. Setiap 10 detik akan mengirimkan ke semua client berupa pesan "Halo ini pesan rutinan dari server".
 	5. Jika client mengirimkan pesan "Halo Server", maka server akan membalas "Ada kebutuhan apa client?"
 	6. Jika client mengirimkan pesan selain "Halo Server", maka server akan membalas "Aku tidak mengerti dengan pesanmu!"
 
 Client bertugas sebagai berikut:
 	1. Mengkoneksikan diri ke dalam jaringan.
-	2. Mengirimkan pesan ke server
+	2. Membuat fungsi untuk mendengar pesan dari server dan dijalankan dengan thread terpisah.
+	3. Mengirimkan pesan ke server.
+	4. Client dapat mengkoneksikan dirinya ke client lain. (belum)
