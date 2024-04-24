@@ -1,6 +1,7 @@
 import socket
 import json
 import time
+import threading
 
 clients_key_address = {}
 clients_key_username = {}
@@ -42,11 +43,19 @@ def listener(socket: socket.socket):
             username_target, message = clear_message.split(" @@pesan@@ ")
             print(address)
             target = clients_key_username[username_target]
-            sender = clients_key_address[address]
+            # sender = clients_key_address[address]
             packet = wrapper_packet(f"{message}", address)
             socket.sendto(packet, target)
         else:
             print(f"{username}: {message}")
+
+def ping_every_clients(socket: socket.socket):
+    while True:
+        sender_address = clients_key_username["Server"]
+        packet = wrapper_packet("", sender_address)
+        for client_target in clients_key_username.values():
+            socket.sendto(packet, client_target)
+        time.sleep(3)
 
 
 if __name__ == "__main__":
@@ -55,6 +64,8 @@ if __name__ == "__main__":
     address_server = server_socket.getsockname()
     clients_key_address[address_server] = "Server"
     clients_key_username["Server"] = address_server
+
+    threading.Thread(target=ping_every_clients, args=(server_socket,), daemon=True).start()
 
     print("Server online...")
 

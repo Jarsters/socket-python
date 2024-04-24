@@ -19,6 +19,8 @@ def listener(socket: socket.socket):
         message, username = opener_packet(message)
         if not message:
             break
+        elif not message:
+            continue  
         else:
             if(not clients_key_address.get(address)):
                 clients_key_address[address] = username
