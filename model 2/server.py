@@ -37,6 +37,13 @@ def listener(socket: socket.socket):
             print(f"{username}: {message}")
             packet = wrapper_packet(f"Halo Client! Addressmu adalah {address}", address_server)
             socket.sendto(packet, address)
+        elif(message.lower().startswith("kirim ke")):
+            clear_message = message.replace("kirim ke ", "")
+            username, message = clear_message.split(" @@pesan@@ ")
+            target = clients_key_username[username]
+            sender = clients_key_address[address]
+            packet = wrapper_packet(f"{message}", sender)
+            socket.sendto(packet, target)
         else:
             print(f"{username}: {message}")
 

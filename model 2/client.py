@@ -28,6 +28,7 @@ def listener(socket: socket.socket):
 
 if __name__ == "__main__":
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
     server_address = {
         "local": ('192.168.1.6', 55555),
