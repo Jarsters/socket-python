@@ -8,17 +8,16 @@ clients = []
 
 def listen_server(client, who="Server"):
     while True:
-        data = ""
         try:
             data = client.recv(1024)
+            data = data.decode()
+            data = json.loads(data)
+            # print(f"Server: {data}")
+            print(f"{who}: {data}")
         except ConnectionAbortedError:
             return "Done ga bang, doneeeee!"
         if(not data):
             return "Done ga bang, doneeeee!"
-        data = data.decode()
-        data = json.loads(data)
-        # print(f"Server: {data}")
-        print(f"{who}: {data}")
 
 def routine_message_to_connected_client():
     global clients
