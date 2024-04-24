@@ -39,10 +39,11 @@ def listener(socket: socket.socket):
             socket.sendto(packet, address)
         elif(message.lower().startswith("kirim ke")):
             clear_message = message.replace("kirim ke ", "")
-            username, message = clear_message.split(" @@pesan@@ ")
-            target = clients_key_username[username]
+            username_target, message = clear_message.split(" @@pesan@@ ")
+            print(address)
+            target = clients_key_username[username_target]
             sender = clients_key_address[address]
-            packet = wrapper_packet(f"{message}", sender)
+            packet = wrapper_packet(f"{message}", address)
             socket.sendto(packet, target)
         else:
             print(f"{username}: {message}")
